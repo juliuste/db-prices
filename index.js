@@ -61,7 +61,17 @@ const parseNote = (data) => ({
 
 const err = (error) => {throw error}
 
+const defaults = {
+	class: 2, // 1st class or 2nd class?
+	noICETrains: false,
+	// todo: can this have any value? the DB app just offers 0, 10, 15, 20, 25
+	transferTime: 0, // in minutes
+	duration: 1440, // search for routes in the next n minutes
+	preferFastRoutes: true
+}
+
 const prices = (start, dest, date, opt) => {
+	opt = Object.assign({}, defaults, opt || {})
 	date = date || new Date()
 	return got('http://ps.bahn.de/preissuche/preissuche/psc_service.go', {json: true, query: {
 		lang: 'en',
@@ -71,16 +81,16 @@ const prices = (start, dest, date, opt) => {
 			d: dest,
 			dt: formatDate(date),
 			t: formatTime(date),
-			c: 2, // 1: 1st class; 2: 2nd class
-			ohneICE: false, // do not use ice trains
-			tct: 0, // transfer time in minutes; default is 0; 0-45, stepped by 5; 0, 10, 15, 20, 25…
-			dur: 1440, // search route in the next n minutes
+			c: opt.class,
+			ohneICE: opt.noICETrains,
+			tct: opt.transferTime,
+			dur: opt.duration,
 			travellers:[{ // one or more
 				bc: 0, // bahncard; 13, 12, 11, 9, 4, 3, 2, 1, 0
 				typ: "E", // E: adult: K: child; B: baby
 				alter: 69
 			}],
-			sv: true, // schnelle verbindung bevorzugen
+			sv: opt.preferFastRoutes,
 			v: "16040000", // client version (direved from date?)
 			dir: "1", // ???
 			bic: false, // ???
