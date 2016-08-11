@@ -1,0 +1,28 @@
+{
+	"name": "db-prices",
+	"description": "Find the cheapest routes using the DB Sparpreise API.",
+	"version": "0.1.0",
+	"keywords": [
+		"train",
+		"railway",
+		"fare",
+		"sparpreis",
+		"preis",
+		"DB",
+		"deutsch",
+		"allemand",
+		"german",
+		"bahn"
+	],
+	"author": "Julius Tens <mail@juliustens.de>",
+	"contributors":["Jannis R <mail@jannisr.de>"],
+	"homepage": "https://github.com/juliuste/db-prices",
+	"repository": "juliuste/db-prices",
+	"bugs": "https://github.com/juliuste/db-prices/issues",
+	"main": "index.js",
+	"files": ["index.js"],
+	"engine" : {
+		"node" : ">=6"
+	},
+	"license": "MIT"
+}
