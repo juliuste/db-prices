@@ -38,7 +38,7 @@ const parseTrip = (data) => ({
 })
 
 const parseRoute = (data) => ({
-	// todo: sel, dir, 
+	// todo: sel, dir,
 	id: data.sid,
 	transfers: data.nt, // is this correct?
 	nightTrain: data.NZVerb, // is this correct?
@@ -71,19 +71,19 @@ const prices = (start, dest, date, opt) => {
 			d: dest,
 			dt: formatDate(date),
 			t: formatTime(date),
-			c: "2", // 1: 1st class; 2: 2nd class
-			ohneICE: "false", // do not use ice trains
-			tct: "0", // transfer time in minutes; default is 0; 0-45, stepped by 5; 0, 10, 15, 20, 25…
-			dur: "1440", // search route in the next n minutes
+			c: 2, // 1: 1st class; 2: 2nd class
+			ohneICE: false, // do not use ice trains
+			tct: 0, // transfer time in minutes; default is 0; 0-45, stepped by 5; 0, 10, 15, 20, 25…
+			dur: 1440, // search route in the next n minutes
 			travellers:[{ // one or more
 				bc: 0, // bahncard; 13, 12, 11, 9, 4, 3, 2, 1, 0
 				typ: "E", // E: adult: K: child; B: baby
-				alter: "69"
+				alter: 69
 			}],
-			sv: "true", // schnelle verbindung bevorzugen
+			sv: true, // schnelle verbindung bevorzugen
 			v: "16040000", // client version (direved from date?)
 			dir: "1", // ???
-			bic: "false", // ???
+			bic: false, // ???
 			device: "HANDY", // todo: is this necessary?
 			os: "iOS_9.3.1" // todo: is this necessary?
 		})
