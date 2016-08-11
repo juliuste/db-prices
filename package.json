@@ -21,6 +21,10 @@
 	"bugs": "https://github.com/juliuste/db-prices/issues",
 	"main": "index.js",
 	"files": ["index.js"],
+	"dependencies": {
+		"got": "^6.3.0",
+		"moment-timezone": "^0.5.5"
+	},
 	"engine" : {
 		"node" : ">=6"
 	},
