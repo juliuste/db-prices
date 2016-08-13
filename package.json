@@ -28,6 +28,8 @@
 	"devDependencies": {
 		"floordate": "^2",
 		"is-roughly-equal": "^.1",
+		"co": "^4.6",
+		"db-stations": "^0.3",
 		"tape-co": "^1",
 		"tap-min": "^1.1"
 	},
