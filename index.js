@@ -7,8 +7,7 @@ const formatDate = (date) => moment(date).tz('Europe/Berlin').format('DD.MM.YY')
 const formatTime = (date) => moment(date).tz('Europe/Berlin').format('HH:mm')
 
 const parsePrice = (string) => {
-	string = string.split(',')
-	return string[0] + string[1] ? string[1] / 100 : 0
+	return string.replace(',','.')
 }
 
 const parseOffer = (routes, data) => ({
