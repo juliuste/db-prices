@@ -62,7 +62,7 @@ const validRoute = co(function* (test, r) {
 		yield validTrip(test, trip)
 
 	test.equal(typeof r.transfers, 'number')
-	test.ok(r.transfers > 0 && r.transfers < 10, 'weird nr of transfers')
+	test.ok(r.transfers >= 0 && r.transfers < 10, 'weird nr of transfers')
 	test.equal(typeof r.nightTrain, 'boolean')
 	validOffer(test, r.offer)
 })
