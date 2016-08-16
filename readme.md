@@ -16,9 +16,9 @@ npm install db-prices
 ## Usage
 
 ```javascript
-	prices = require('db-prices')
+prices = require('db-prices')
 
-	prices(from, to, [date], [opt]).then(…)
+prices(from, to, [date], [opt]).then(…)
 ```
 
 `from` and `to` must be station IDs like `8000105`.
@@ -806,4 +806,4 @@ With `from = 8000105`, `to = 8011160` and `date = new Date('2016-08-17T00:00:00.
 
 If you found a bug, want to propose a feature or feel the urge to complain about your life, feel free to visit [the issues page](https://github.com/juliuste/db-prices/issues).
 
-Thanks to [Jannis R](https://github.com/derhuerst) for contributing.
+Cheers to [Jannis R](https://github.com/derhuerst) for contributing.
