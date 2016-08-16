@@ -60,6 +60,11 @@ const err = (error) => {throw error}
 
 const defaults = {
 	class: 2, // 1st class or 2nd class?
+	travellers: [{ // one or more
+		bc: 0, // bahncard; 13, 12, 11, 9, 4, 3, 2, 1, 0
+		typ: "E", // E: adult: K: child; B: baby
+		alter: 30
+	}],
 	noICETrains: false,
 	// todo: can this have any value? the DB app just offers 0, 10, 15, 20, 25
 	transferTime: 0, // in minutes
@@ -82,11 +87,7 @@ const prices = (start, dest, date, opt) => {
 			ohneICE: opt.noICETrains,
 			tct: opt.transferTime,
 			dur: opt.duration,
-			travellers:[{ // one or more
-				bc: 0, // bahncard; 13, 12, 11, 9, 4, 3, 2, 1, 0
-				typ: "E", // E: adult: K: child; B: baby
-				alter: 69
-			}],
+			travellers: opt.travellers,
 			sv: opt.preferFastRoutes,
 			v: "16040000", // client version (direved from date?)
 			dir: "1", // ???
