@@ -6,9 +6,7 @@ const moment = require('moment-timezone')
 const formatDate = (date) => moment(date).tz('Europe/Berlin').format('DD.MM.YY')
 const formatTime = (date) => moment(date).tz('Europe/Berlin').format('HH:mm')
 
-const parsePrice = (string) => {
-	return string.replace(',','.')
-}
+const parsePrice = (string) => parseFloat(string.replace(',','.'))
 
 const parseOffer = (routes, data) => ({
 	// todo: sel, t, c, arq, ff, aix, risids
@@ -39,7 +37,7 @@ const parseTrip = (data) => ({
 const parseRoute = (data) => ({
 	// todo: sel, dir,
 	id: data.sid,
-	transfers: data.nt, // is this correct?
+	transfers: +data.nt, // is this correct?
 	nightTrain: data.NZVerb, // is this correct?
 	trips: data.trains.map(parseTrip),
 	offer: null
