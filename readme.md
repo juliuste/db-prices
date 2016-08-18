@@ -9,6 +9,7 @@ JavaScript module for finding the cheapest railway connections using the Deutsch
 [![MIT License](https://img.shields.io/badge/license-MIT-black.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
+
 ```bash
 npm install db-prices
 ```
@@ -16,7 +17,7 @@ npm install db-prices
 ## Usage
 
 ```javascript
-prices = require('db-prices')
+const prices = require('db-prices')
 
 prices(from, to, [date], [opt]).then(…)
 ```
@@ -25,6 +26,7 @@ prices(from, to, [date], [opt]).then(…)
 `date` must be a `Date` object; if empty, the current datetime will be used.
 
 With `opt`, you can override the default options, which look like this:
+
 ```javascript
 {
 	class: 				2, 		// 1st class or 2nd class
@@ -38,7 +40,6 @@ With `opt`, you can override the default options, which look like this:
 		alter: 30 	// age
 	}],
 }
-
 ```
 
 ## Response
