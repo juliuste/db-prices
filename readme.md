@@ -91,10 +91,11 @@ With `from = 8000105`, `to = 8011160` and `date = new Date('2016-08-17T00:00:00.
 	}
 }, /* … */]
 ```
+
 ## Similar Projects
 
 - [db-hafas](https://github.com/derhuerst/db-hafas/) – "JavaScript client for the DB HAFAS API."
-- [db-hafas-rest](https://github.com/derhuerst/db-hafas-rest/) – "DB Hafas REST API"
+- [db-hafas-rest](https://github.com/juliuste/db-hafas-rest/) – "DB Hafas REST API"
 - [db-stations](https://github.com/derhuerst/db-stations/) – "A list of DB stations."
 
 ## Contributing
