@@ -6,7 +6,7 @@ JavaScript module for finding the cheapest railway connections using the Deutsch
 [![Build Status](https://travis-ci.org/juliuste/db-prices.svg?branch=master)](https://travis-ci.org/juliuste/db-prices)
 [![dependency status](https://img.shields.io/david/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices)
 [![dev dependency status](https://img.shields.io/david/dev/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices#info=devDependencies)
-[![MIT License](https://img.shields.io/badge/license-MIT-black.svg)](https://opensource.org/licenses/MIT)
+[![license](https://img.shields.io/github/license/juliuste/db-prices.svg?style=flat)](LICENSE)
 
 ## Installation
 
@@ -58,11 +58,13 @@ With `from = 8000105`, `to = 8011160` and `date = new Date('2016-08-17T00:00:00.
 		start: 2016 - 08 - 17 T03: 06: 00.000 Z,
 		from: {
 			station: 8000105,
+			name: 'Frankfurt(Main)Hbf',
 			platform: '7'
 		},
 		end: 2016 - 08 - 17 T04: 55: 00.000 Z,
 		to: {
 			station: 8000128,
+			name: 'Göttingen',
 			platform: '4'
 		},
 		line: 'ICE  988',
@@ -72,11 +74,13 @@ With `from = 8000105`, `to = 8011160` and `date = new Date('2016-08-17T00:00:00.
 		start: 2016 - 08 - 17 T05: 04: 00.000 Z,
 		from: {
 			station: 8000128,
+			name: 'Göttingen',
 			platform: '4'
 		},
 		end: 2016 - 08 - 17 T07: 58: 00.000 Z,
 		to: {
 			station: 8011160,
+			name: 'Berlin Hbf',
 			platform: '12'
 		},
 		line: 'ICE  876',

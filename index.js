@@ -23,11 +23,13 @@ const parseTrip = (data) => ({
 	start: new Date(+data.dep.m),
 	from: {
 		station: +data.s,
+		name: data.sn,
 		platform: data.pd
 	},
 	end: new Date(+data.arr.m),
 	to: {
 		station: +data.d,
+		name: data.dn,
 		platform: data.pa
 	},
 	line: data.tn,

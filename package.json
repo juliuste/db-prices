@@ -1,7 +1,7 @@
 {
 	"name": "db-prices",
 	"description": "Find the cheapest routes using the DB Sparpreise API.",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"keywords": [
 		"train",
 		"railway",
@@ -20,7 +20,7 @@
 	"repository": "juliuste/db-prices",
 	"bugs": "https://github.com/juliuste/db-prices/issues",
 	"main": "index.js",
-	"files": ["index.js"],
+	"files": ["index.js", "test.js"],
 	"dependencies": {
 		"got": "^6.3.0",
 		"moment-timezone": "^0.5.5"
