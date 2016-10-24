@@ -10,6 +10,7 @@ const parsePrice = (string) => parseFloat(string.replace(',','.'))
 
 const parseOffer = (routes, data) => ({
 	// todo: sel, t, c, arq, ff, aix, risids
+	raw: data,
 	ref: data.pky,
 	discount: data.tt === 'SP', // are there others than SP & NP?
 	price: parsePrice(data.p),
@@ -42,7 +43,8 @@ const parseRoute = (data) => ({
 	transfers: +data.nt, // is this correct?
 	nightTrain: data.NZVerb, // is this correct?
 	trips: data.trains.map(parseTrip),
-	offer: null
+	offer: null,
+	raw: data
 })
 
 const parseNotes = (data) => {

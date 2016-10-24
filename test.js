@@ -78,7 +78,6 @@ test('Berlin Hbf -> München Hbf', function* (test) {
 })
 
 
-
 // todo: opt.class
 // todo: opt.noICETrains
 // todo: opt.transferTime
