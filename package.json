@@ -1,7 +1,7 @@
 {
 	"name": "db-prices",
 	"description": "Find the cheapest routes using the DB Sparpreise API.",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"keywords": [
 		"train",
 		"railway",
@@ -26,10 +26,10 @@
 		"moment-timezone": "^0.5.5"
 	},
 	"devDependencies": {
-		"floordate": "^2",
+		"floordate": "^3.0.0",
 		"is-roughly-equal": "^0.1",
 		"co": "^4.6",
-		"db-stations": "^0.3",
+		"db-stations": "^0.4.0",
 		"tape-co": "^1",
 		"tap-min": "^1.1"
 	},
