@@ -22,8 +22,9 @@
 	"main": "index.js",
 	"files": ["index.js"],
 	"dependencies": {
-		"got": "^6.3.0",
-		"moment-timezone": "^0.5.5"
+		"fetch-ponyfill": "^4.0.0",
+		"moment-timezone": "^0.5.5",
+		"query-string": "^4.3.4"
 	},
 	"devDependencies": {
 		"floordate": "^3.0.0",
