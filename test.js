@@ -2,11 +2,11 @@
 
 const floor = require('floordate')
 const isRoughlyEqual = require('is-roughly-equal')
-const co = require('co').wrap
 const stations = require('db-stations')
-const test = require('tape-co').default
+const test = require('tape')
+require('tape-promise').default(test)
 
-const prices = require('./index')
+const prices = require('.')
 
 
 
@@ -27,22 +27,22 @@ const validPrice = (p) => 'number' === typeof p && p > 0 && p < 1000
 const findStation = (id) => new Promise((yay, nay) =>
 	stations(id).on('error', nay).once('data', yay))
 
-const validTrip = co(function* (test, t) {
+const validTrip = async (test, t) => {
 	test.ok(t, 'missing trip')
 
 	test.ok(validDate(t.start), 'invalid data')
 	test.ok(t.from, 'missing `from`')
-	test.ok(yield findStation(t.from.station), 'station not found')
+	test.ok(await findStation(t.from.station), 'station not found')
 	// test.equal(typeof t.from.platform, 'string')
 
 	test.ok(validDate(t.end))
 	test.ok(t.to, 'missing `to`')
-	test.ok(yield findStation(t.to.station), 'station not found')
+	test.ok(await findStation(t.to.station), 'station not found')
 	// test.equal(typeof t.to.platform, 'string')
 
 	test.equal(typeof t.line, 'string')
 	test.equal(typeof t.type, 'string')
-})
+}
 
 const validOffer = (test, o) => {
 	test.ok(o, 'missing offer')
@@ -53,28 +53,30 @@ const validOffer = (test, o) => {
 	test.equal(typeof o.anyTrain, 'boolean')
 }
 
-const validRoute = co(function* (test, r) {
+const validRoute = async (test, r) => {
 	test.ok(r, 'missing route')
 
 	test.ok(Array.isArray(r.trips), 'missing trips')
 	test.ok(r.trips.length > 0, 'missing trips')
-	for (let trip of r.trips)
-		yield validTrip(test, trip)
+	for (let trip of r.trips) {
+		await validTrip(test, trip)
+	}
 
 	test.equal(typeof r.transfers, 'number')
 	test.ok(r.transfers >= 0 && r.transfers < 10, 'weird nr of transfers')
 	test.equal(typeof r.nightTrain, 'boolean')
 	validOffer(test, r.offer)
-})
+}
 
 
 
-test('Berlin Hbf -> München Hbf', function* (test) {
-	const results = yield prices(berlin, münchen, when)
+test('Berlin Hbf -> München Hbf', async (test) => {
+	const results = await prices(berlin, münchen, when)
 	test.ok(Array.isArray(results))
 	test.ok(results.length > 0, 'no results')
-	for (let result of results)
-		yield validRoute(test, result)
+	for (let result of results) {
+		await validRoute(test, result)
+	}
 })
 
 

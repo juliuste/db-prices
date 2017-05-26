@@ -1,6 +1,7 @@
 'use strict'
 
-const got = require('got')
+const {stringify} = require('query-string')
+const {fetch} = require('fetch-ponyfill')()
 const moment = require('moment-timezone')
 
 const formatDate = (date) => moment(date).tz('Europe/Berlin').format('DD.MM.YY')
@@ -58,8 +59,6 @@ const parseNote = (data) => ({
 	text: data.hinweis
 })
 
-const err = (error) => {throw error}
-
 const defaults = {
 	class: 2, // 1st class or 2nd class?
 	travellers: [{ // one or more
@@ -74,10 +73,13 @@ const defaults = {
 	preferFastRoutes: true
 }
 
+const endpoint = 'http://ps.bahn.de/preissuche/preissuche/psc_service.go'
+
 const prices = (start, dest, date, opt) => {
 	opt = Object.assign({}, defaults, opt || {})
 	date = date || new Date()
-	return got('http://ps.bahn.de/preissuche/preissuche/psc_service.go', {json: true, query: {
+
+	const query = {
 		lang: 'en',
 		service: 'pscangebotsuche',
 		data: JSON.stringify({
@@ -97,10 +99,22 @@ const prices = (start, dest, date, opt) => {
 			device: "HANDY", // todo: is this necessary?
 			os: "iOS_9.3.1" // todo: is this necessary?
 		})
-	}})
-	.then((res) => {
-		const body = res.body
+	}
 
+	return fetch(endpoint + '?' + stringify(query), {
+		headers: {accept: 'application/json'},
+		mode: 'cors',
+		redirect: 'follow'
+	})
+	.then((res) => {
+		if (!res.ok) {
+			const err = new Error(res.statusText)
+			err.statusCode = res.status
+			throw err
+		}
+		return res.json()
+	})
+	.then((body) => {
 		const routes = []
 		for(let id in body.verbindungen) routes[id] = parseRoute(body.verbindungen[id])
 
@@ -110,7 +124,7 @@ const prices = (start, dest, date, opt) => {
 		for(let offer of offers) for(let route of offer.routes) route.offer = offer
 
 		return routes
-	}, err)
+	})
 }
 
 module.exports = prices
