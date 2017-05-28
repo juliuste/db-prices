@@ -3,48 +3,72 @@
 const {stringify} = require('query-string')
 const {fetch} = require('fetch-ponyfill')()
 const moment = require('moment-timezone')
+const slugg = require('slugg')
+const minBy = require('lodash.minby')
 
 const formatDate = (date) => moment(date).tz('Europe/Berlin').format('DD.MM.YY')
 const formatTime = (date) => moment(date).tz('Europe/Berlin').format('HH:mm')
 
-const parsePrice = (string) => parseFloat(string.replace(',','.'))
+const parsePrice = (string) => parseFloat(string.replace(',', '.'))
 
-const parseOffer = (routes, data) => ({
+const parseOffer = (data) => ({
 	// todo: sel, t, c, arq, ff, aix, risids
 	ref: data.pky,
 	discount: data.tt === 'SP', // are there others than SP & NP?
 	price: parsePrice(data.p),
-	routes: data.sids.map((sid) => routes.find((route) => route.id === sid)),
+	routes: data.sids,
 	anyTrain: data.zb !== 'Y'
 })
 
-const parseTrip = (data) => ({
+const parseWhen = (data) => {
+	// todo: timezone
+	return moment.tz(parseInt(data.m), 'Europe/Berlin').toISOString()
+}
+
+const parseLeg = (data) => ({
 	// todo: rp, re, sp
-	id: data.tid,
-	start: new Date(+data.dep.m),
-	from: {
-		station: +data.s,
-		name: data.sn,
-		platform: data.pd
+	origin: {
+		type: 'station',
+		id: data.s,
+		name: data.sn
+		// todo: coordinates
 	},
-	end: new Date(+data.arr.m),
+	start: parseWhen(data.dep),
+	departurePlatform: data.pd,
 	to: {
-		station: +data.d,
-		name: data.dn,
-		platform: data.pa
+		type: 'station',
+		id: data.d,
+		name: data.dn
+		// todo: coordinates
 	},
-	line: data.tn,
-	type: data.eg
+	end: parseWhen(data.arr),
+	arrivalPlatform: data.pa,
+	line: {
+		type: 'line',
+		id: slugg(data.tn),
+		name: data.tn,
+		// todo: mode
+		product: data.eg
+	}
 })
 
-const parseRoute = (data) => ({
-	// todo: sel, dir,
-	id: data.sid,
-	transfers: +data.nt, // is this correct?
-	nightTrain: data.NZVerb, // is this correct?
-	trips: data.trains.map(parseTrip),
-	offer: null
-})
+const parseJourney = (_, offers) => {
+	let offer = minBy(offers.filter((o) => o.routes.includes(_.sid)), (o) => o.price)
+	const price = offer ? {
+		currency: 'EUR',
+		amount: offer.price,
+		discount: offer.discount
+	} : null
+
+	return {
+		// todo: sel, dir
+		type: 'journey',
+		id: _.sid,
+		legs: _.trains.map(parseLeg),
+		price,
+		nightTrain: _.NZVerb // todo: why here?
+	}
+}
 
 const parseNotes = (data) => {
 	const results = {}
@@ -115,21 +139,17 @@ const prices = (start, dest, date, opt) => {
 		return res.json()
 	})
 	.then((body) => {
-		const routes = []
-		for (let id in body.verbindungen) {
-			routes[id] = parseRoute(body.verbindungen[id])
-		}
-
 		const offers = []
 		for (let id in body.angebote) {
-			offers[id] = parseOffer(routes, body.angebote[id])
+			offers.push(parseOffer(body.angebote[id]))
 		}
 
-		for (let offer of offers) {
-			for (let route of offer.routes) route.offer = offer
+		const journeys = {}
+		for (let id in body.verbindungen) {
+			journeys[id] = parseJourney(body.verbindungen[id], offers)
 		}
 
-		return routes
+		return journeys
 	})
 }
 
