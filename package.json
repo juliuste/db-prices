@@ -15,21 +15,23 @@
 		"bahn"
 	],
 	"author": "Julius Tens <mail@juliustens.de>",
-	"contributors":["Jannis R <mail@jannisr.de>"],
+	"contributors": [
+		"Jannis R <mail@jannisr.de>"
+	],
 	"homepage": "https://github.com/juliuste/db-prices",
 	"repository": "juliuste/db-prices",
 	"bugs": "https://github.com/juliuste/db-prices/issues",
 	"main": "index.js",
-	"files": ["index.js"],
+	"files": [
+		"index.js"
+	],
 	"dependencies": {
 		"fetch-ponyfill": "^4.0.0",
 		"moment-timezone": "^0.5.5",
 		"query-string": "^4.3.4"
 	},
 	"devDependencies": {
-		"floordate": "^3.0.0",
 		"is-roughly-equal": "^0.1",
-		"co": "^4.6",
 		"db-stations": "^0.4.0",
 		"tape": "^4.6.3",
 		"tape-promise": "^2.0.1",
@@ -39,8 +41,8 @@
 		"test": "node test.js | tap-min",
 		"prepublish": "npm test"
 	},
-	"engine" : {
-		"node" : ">=6"
+	"engine": {
+		"node": ">=6"
 	},
 	"license": "MIT"
 }

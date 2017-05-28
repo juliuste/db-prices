@@ -116,12 +116,18 @@ const prices = (start, dest, date, opt) => {
 	})
 	.then((body) => {
 		const routes = []
-		for(let id in body.verbindungen) routes[id] = parseRoute(body.verbindungen[id])
+		for (let id in body.verbindungen) {
+			routes[id] = parseRoute(body.verbindungen[id])
+		}
 
 		const offers = []
-		for(let id in body.angebote) offers[id] = parseOffer(routes, body.angebote[id])
+		for (let id in body.angebote) {
+			offers[id] = parseOffer(routes, body.angebote[id])
+		}
 
-		for(let offer of offers) for(let route of offer.routes) route.offer = offer
+		for (let offer of offers) {
+			for (let route of offer.routes) route.offer = offer
+		}
 
 		return routes
 	})

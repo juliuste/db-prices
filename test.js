@@ -1,6 +1,6 @@
 'use strict'
 
-const floor = require('floordate')
+const moment = require('moment-timezone')
 const isRoughlyEqual = require('is-roughly-equal')
 const stations = require('db-stations')
 const test = require('tape')
@@ -16,11 +16,12 @@ const day = 24 * hour
 const berlin = 8011160
 const münchen = 8000261
 
-const when = new Date(floor(new Date(), 'day') + day)
+const tz = 'Europe/Berlin'
+const when = moment.tz(Date.now(), tz).hour(10).minute(30).second(0).day('monday').toDate()
 
 
 
-const validDate = (d) => d instanceof Date && isRoughlyEqual(2 * hour, +when)
+const validDate = (d) => d instanceof Date && isRoughlyEqual(2 * hour, +when, +d)
 
 const validPrice = (p) => 'number' === typeof p && p > 0 && p < 1000
 
@@ -30,7 +31,7 @@ const findStation = (id) => new Promise((yay, nay) =>
 const validTrip = async (test, t) => {
 	test.ok(t, 'missing trip')
 
-	test.ok(validDate(t.start), 'invalid data')
+	test.ok(validDate(t.start), 'invalid date')
 	test.ok(t.from, 'missing `from`')
 	test.ok(await findStation(t.from.station), 'station not found')
 	// test.equal(typeof t.from.platform, 'string')
