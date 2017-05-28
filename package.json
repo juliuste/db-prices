@@ -23,7 +23,8 @@
 	"bugs": "https://github.com/juliuste/db-prices/issues",
 	"main": "index.js",
 	"files": [
-		"index.js"
+		"index.js",
+		"parse.js"
 	],
 	"dependencies": {
 		"fetch-ponyfill": "^4.0.0",
