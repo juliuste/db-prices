@@ -34,11 +34,11 @@
 		"slugg": "^1.2.0"
 	},
 	"devDependencies": {
+		"db-stations": "^1.0.1",
 		"is-roughly-equal": "^0.1",
-		"db-stations": "^0.4.0",
+		"tap-min": "^1.1",
 		"tape": "^4.6.3",
-		"tape-promise": "^2.0.1",
-		"tap-min": "^1.1"
+		"tape-promise": "^2.0.1"
 	},
 	"scripts": {
 		"test": "node test.js | tap-min",
