@@ -17,7 +17,8 @@ const berlin = 8011160
 const münchen = 8000261
 
 const tz = 'Europe/Berlin'
-const when = moment.tz(Date.now(), tz).hour(10).minute(30).second(0).day('monday').toDate()
+// some monday in the future
+const when = moment.tz(Date.now(), tz).hour(10).minute(30).second(0).day(1 + 7).toDate()
 
 
 
@@ -80,6 +81,8 @@ test('Berlin Hbf -> München Hbf', async (test) => {
 	for (let result of results) {
 		await validJourney(test, result)
 	}
+
+	test.end()
 })
 
 

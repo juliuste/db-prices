@@ -72,9 +72,9 @@ const queryPrices = (start, dest, date, opt) => {
 			offers.push(parse.offer(body.angebote[id], notes))
 		}
 
-		const journeys = {}
+		const journeys = []
 		for (let id in body.verbindungen) {
-			journeys[id] = parse.journey(body.verbindungen[id], offers)
+			journeys.push(parse.journey(body.verbindungen[id], offers))
 		}
 
 		return journeys

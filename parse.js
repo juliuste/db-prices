@@ -37,7 +37,7 @@ const leg = (data) => ({
 	},
 	start: when(data.dep),
 	departurePlatform: data.pd,
-	to: {
+	destination: {
 		type: 'station',
 		id: data.d,
 		name: data.dn
@@ -55,6 +55,8 @@ const leg = (data) => ({
 })
 
 const journey = (_, offers) => {
+	const legs = _.trains.map(leg)
+
 	let offer = minBy(offers.filter((o) => o.routes.includes(_.sid)), (o) => o.price)
 	const price = offer ? {
 		currency: 'EUR',
@@ -68,7 +70,9 @@ const journey = (_, offers) => {
 		// todo: sel, dir
 		type: 'journey',
 		id: _.sid,
-		legs: _.trains.map(leg),
+		origin: legs[0].origin,
+		destination: legs[legs.length - 1].destination,
+		legs,
 		price,
 		nightTrain: _.NZVerb // todo: why here?
 	}
