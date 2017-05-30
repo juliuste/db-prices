@@ -21,52 +21,54 @@ const when = moment.tz(Date.now(), tz).hour(10).minute(30).second(0).day('monday
 
 
 
-const validDate = (d) => d instanceof Date && isRoughlyEqual(2 * hour, +when, +d)
-
-const validPrice = (p) => 'number' === typeof p && p > 0 && p < 1000
+const validDate = (d) => {
+	return isRoughlyEqual(36 * hour, +when, +new Date(d))
+}
 
 const findStation = (id) => new Promise((yay, nay) =>
 	stations(id).on('error', nay).once('data', yay))
 
-const validTrip = async (test, t) => {
+const validLeg = async (test, t) => {
 	test.ok(t, 'missing trip')
 
-	test.ok(validDate(t.start), 'invalid date')
-	test.ok(t.from, 'missing `from`')
-	test.ok(await findStation(t.from.station), 'station not found')
-	// test.equal(typeof t.from.platform, 'string')
+	test.ok(validDate(t.start), 'invalid start date')
+	test.ok(t.origin, 'missing `origin`')
+	test.ok(await findStation(t.origin.station), 'station not found')
+	test.equal(typeof t.departurePlatform, 'string')
 
-	test.ok(validDate(t.end))
-	test.ok(t.to, 'missing `to`')
-	test.ok(await findStation(t.to.station), 'station not found')
-	// test.equal(typeof t.to.platform, 'string')
+	if (!validDate(t.end)) console.error(t.end, when)
+	test.ok(validDate(t.end), 'invalid end date')
+	test.ok(t.destination, 'missing `destination`')
+	test.ok(await findStation(t.destination.station), 'station not found')
+	test.equal(typeof t.arrivalPlatform, 'string')
 
-	test.equal(typeof t.line, 'string')
-	test.equal(typeof t.type, 'string')
+	test.ok(t.line, 'missing line')
+	test.equal(typeof t.line.name, 'string')
+	// test.equal(typeof t.line.mode, 'string') // todo
+	test.equal(typeof t.line.product, 'string')
 }
 
-const validOffer = (test, o) => {
-	test.ok(o, 'missing offer')
+const validPrice = (test, p) => {
+	test.ok(p, 'missing price')
 
-	test.equal(typeof o.discount, 'boolean')
-	test.ok(validPrice(o.price), 'invalid price')
-	test.ok(Array.isArray(o.routes), 'missing routes') // avoiding recursion here
-	test.equal(typeof o.anyTrain, 'boolean')
+	test.equal(p.currency, 'EUR')
+	test.equal(typeof p.amount, 'number')
+	test.ok(p.amount > 0 && p.amount < 1000, 'ridiculous amount')
+	test.equal(typeof p.discount, 'boolean')
+	// test.equal(typeof p.anyTrain, 'boolean') // todo
 }
 
-const validRoute = async (test, r) => {
-	test.ok(r, 'missing route')
+const validJourney = async (test, j) => {
+	test.ok(j, 'missing route')
 
-	test.ok(Array.isArray(r.trips), 'missing trips')
-	test.ok(r.trips.length > 0, 'missing trips')
-	for (let trip of r.trips) {
-		await validTrip(test, trip)
+	test.ok(Array.isArray(j.legs), 'missing legs')
+	test.ok(j.legs.length > 0, 'missing legs')
+	for (let leg of j.legs) {
+		await validLeg(test, leg)
 	}
 
-	test.equal(typeof r.transfers, 'number')
-	test.ok(r.transfers >= 0 && r.transfers < 10, 'weird nr of transfers')
-	test.equal(typeof r.nightTrain, 'boolean')
-	validOffer(test, r.offer)
+	test.equal(typeof j.nightTrain, 'boolean')
+	validPrice(test, j.price)
 }
 
 
@@ -76,7 +78,7 @@ test('Berlin Hbf -> München Hbf', async (test) => {
 	test.ok(Array.isArray(results))
 	test.ok(results.length > 0, 'no results')
 	for (let result of results) {
-		await validRoute(test, result)
+		await validJourney(test, result)
 	}
 })
 
