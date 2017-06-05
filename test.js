@@ -56,7 +56,7 @@ const validPrice = (test, p) => {
 	test.equal(typeof p.amount, 'number')
 	test.ok(p.amount > 0 && p.amount < 1000, 'ridiculous amount')
 	test.equal(typeof p.discount, 'boolean')
-	// test.equal(typeof p.anyTrain, 'boolean') // todo
+	test.equal(typeof p.anyTrain, 'boolean')
 }
 
 const validJourney = async (test, j) => {

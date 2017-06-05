@@ -7,6 +7,7 @@ JavaScript module for finding the cheapest railway connections using the Deutsch
 [![dependency status](https://img.shields.io/david/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices)
 [![dev dependency status](https://img.shields.io/david/dev/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices#info=devDependencies)
 [![license](https://img.shields.io/github/license/juliuste/db-prices.svg?style=flat)](LICENSE)
+[![chat on gitter](https://badges.gitter.im/public-transport/Lobby.svg)](https://gitter.im/public-transport/Lobby)
 
 ## Installation
 

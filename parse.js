@@ -70,7 +70,8 @@ const journey = (_, offers) => {
 		amount: offer.price,
 		discount: offer.discount,
 		name: offer.name,
-		description: offer.description
+		description: offer.description,
+		anyTrain: offer.anyTrain
 	} : null
 
 	return {
