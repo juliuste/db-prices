@@ -27,6 +27,13 @@ const when = (data) => {
 	return moment.tz(parseInt(data.m), 'Europe/Berlin').toISOString()
 }
 
+// see https://github.com/public-transport/friendly-public-transport-format/blob/5ba55e2/docs/readme.md#modes
+const modesByProduct = {
+	S: 'train',
+	IC: 'train',
+	ICE: 'train'
+}
+
 const leg = (data) => ({
 	// todo: rp, re, sp
 	origin: {
@@ -36,7 +43,7 @@ const leg = (data) => ({
 		// todo: coordinates
 	},
 	start: when(data.dep),
-	departurePlatform: data.pd,
+	departurePlatform: data.pd || null,
 	destination: {
 		type: 'station',
 		id: data.d,
@@ -44,12 +51,12 @@ const leg = (data) => ({
 		// todo: coordinates
 	},
 	end: when(data.arr),
-	arrivalPlatform: data.pa,
+	arrivalPlatform: data.pa || null,
 	line: {
 		type: 'line',
 		id: slugg(data.tn),
 		name: data.tn,
-		// todo: mode
+		mode: modesByProduct[data.eg] || null,
 		product: data.eg
 	}
 })

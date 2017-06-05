@@ -35,17 +35,17 @@ const validLeg = async (test, t) => {
 	test.ok(validDate(t.start), 'invalid start date')
 	test.ok(t.origin, 'missing `origin`')
 	test.ok(await findStation(t.origin.station), 'station not found')
-	test.equal(typeof t.departurePlatform, 'string')
+	if (t.departurePlatform) test.equal(typeof t.departurePlatform, 'string')
 
 	if (!validDate(t.end)) console.error(t.end, when)
 	test.ok(validDate(t.end), 'invalid end date')
 	test.ok(t.destination, 'missing `destination`')
 	test.ok(await findStation(t.destination.station), 'station not found')
-	test.equal(typeof t.arrivalPlatform, 'string')
+	if (t.arrivalPlatform) test.equal(typeof t.arrivalPlatform, 'string')
 
 	test.ok(t.line, 'missing line')
 	test.equal(typeof t.line.name, 'string')
-	// test.equal(typeof t.line.mode, 'string') // todo
+	test.equal(typeof t.line.mode, 'string')
 	test.equal(typeof t.line.product, 'string')
 }
 
