@@ -1,63 +1,13 @@
 'use strict'
 
+const moment = require('moment-timezone')
 const {stringify} = require('query-string')
 const {fetch} = require('fetch-ponyfill')()
-const moment = require('moment-timezone')
+
+const parse = require('./parse')
 
 const formatDate = (date) => moment(date).tz('Europe/Berlin').format('DD.MM.YY')
 const formatTime = (date) => moment(date).tz('Europe/Berlin').format('HH:mm')
-
-const parsePrice = (string) => parseFloat(string.replace(',','.'))
-
-const parseOffer = (routes, data) => ({
-	// todo: sel, t, c, arq, ff, aix, risids
-	ref: data.pky,
-	discount: data.tt === 'SP', // are there others than SP & NP?
-	price: parsePrice(data.p),
-	routes: data.sids.map((sid) => routes.find((route) => route.id === sid)),
-	anyTrain: data.zb !== 'Y'
-})
-
-const parseTrip = (data) => ({
-	// todo: rp, re, sp
-	id: data.tid,
-	start: new Date(+data.dep.m),
-	from: {
-		station: +data.s,
-		name: data.sn,
-		platform: data.pd
-	},
-	end: new Date(+data.arr.m),
-	to: {
-		station: +data.d,
-		name: data.dn,
-		platform: data.pa
-	},
-	line: data.tn,
-	type: data.eg
-})
-
-const parseRoute = (data) => ({
-	// todo: sel, dir,
-	id: data.sid,
-	transfers: +data.nt, // is this correct?
-	nightTrain: data.NZVerb, // is this correct?
-	trips: data.trains.map(parseTrip),
-	offer: null
-})
-
-const parseNotes = (data) => {
-	const results = {}
-	for(let ref in data){
-		results[ref] = parseNote(data[ref])
-	}
-	return results
-}
-
-const parseNote = (data) => ({
-	title: data.name,
-	text: data.hinweis
-})
 
 const defaults = {
 	class: 2, // 1st class or 2nd class?
@@ -75,7 +25,7 @@ const defaults = {
 
 const endpoint = 'http://ps.bahn.de/preissuche/preissuche/psc_service.go'
 
-const prices = (start, dest, date, opt) => {
+const queryPrices = (start, dest, date, opt) => {
 	opt = Object.assign({}, defaults, opt || {})
 	date = date || new Date()
 
@@ -115,16 +65,20 @@ const prices = (start, dest, date, opt) => {
 		return res.json()
 	})
 	.then((body) => {
-		const routes = []
-		for(let id in body.verbindungen) routes[id] = parseRoute(body.verbindungen[id])
+		const notes = parse.notes(body.peTexte)
 
 		const offers = []
-		for(let id in body.angebote) offers[id] = parseOffer(routes, body.angebote[id])
+		for (let id in body.angebote) {
+			offers.push(parse.offer(body.angebote[id], notes))
+		}
 
-		for(let offer of offers) for(let route of offer.routes) route.offer = offer
+		const journeys = []
+		for (let id in body.verbindungen) {
+			journeys.push(parse.journey(body.verbindungen[id], offers))
+		}
 
-		return routes
+		return journeys
 	})
 }
 
-module.exports = prices
+module.exports = queryPrices
