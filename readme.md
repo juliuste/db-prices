@@ -1,5 +1,7 @@
 # db-prices
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/juliuste/db-prices.svg)](https://greenkeeper.io/)
+
 JavaScript module for finding the cheapest railway connections using the Deutsche Bahn Sparpreise API.
 
 [![npm version](https://img.shields.io/npm/v/db-prices.svg)](https://www.npmjs.com/package/db-prices)
