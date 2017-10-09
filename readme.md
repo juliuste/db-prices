@@ -1,6 +1,6 @@
 # db-prices
 
-JavaScript module for finding the cheapest railway connections using the Deutsche Bahn Sparpreise API.
+JavaScript module for finding the cheapest railway connections using the Deutsche Bahn Sparpreise API. Inofficial, using an endpoint by *Deutsche Bahn*. Ask them for permission before using this module in production.
 
 [![npm version](https://img.shields.io/npm/v/db-prices.svg)](https://www.npmjs.com/package/db-prices)
 [![Build Status](https://travis-ci.org/juliuste/db-prices.svg?branch=master)](https://travis-ci.org/juliuste/db-prices)
