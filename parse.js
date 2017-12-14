@@ -31,7 +31,10 @@ const when = (data) => {
 const modesByProduct = {
 	S: 'train',
 	IC: 'train',
-	ICE: 'train'
+	ICE: 'train',
+	RE: 'train',
+	VBG: 'train', // http://www.laenderbahn.com/vogtlandbahn/
+	ALX: 'train' // http://www.laenderbahn.com/alex
 }
 
 const leg = (data) => ({
