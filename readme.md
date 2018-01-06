@@ -4,6 +4,7 @@ JavaScript module for finding the cheapest railway connections using the Deutsch
 
 [![npm version](https://img.shields.io/npm/v/db-prices.svg)](https://www.npmjs.com/package/db-prices)
 [![Build Status](https://travis-ci.org/juliuste/db-prices.svg?branch=master)](https://travis-ci.org/juliuste/db-prices)
+[![Greenkeeper badge](https://badges.greenkeeper.io/juliuste/db-prices.svg)](https://greenkeeper.io/)
 [![dependency status](https://img.shields.io/david/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices)
 [![dev dependency status](https://img.shields.io/david/dev/juliuste/db-prices.svg)](https://david-dm.org/juliuste/db-prices#info=devDependencies)
 [![license](https://img.shields.io/github/license/juliuste/db-prices.svg?style=flat)](LICENSE)
