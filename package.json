@@ -34,7 +34,7 @@
 		"slugg": "^1.2.0"
 	},
 	"devDependencies": {
-		"db-stations": "^1.0.1",
+		"db-stations": "^2.0.0",
 		"is-roughly-equal": "^0.1",
 		"tap-spec": "^4.1.1",
 		"tape": "^4.6.3",
