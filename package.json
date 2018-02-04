@@ -27,7 +27,7 @@
 		"parse.js"
 	],
 	"dependencies": {
-		"fetch-ponyfill": "^4.0.0",
+		"fetch-ponyfill": "^5.0.0",
 		"lodash.minby": "^4.6.0",
 		"moment-timezone": "^0.5.5",
 		"query-string": "^5.0.0",
