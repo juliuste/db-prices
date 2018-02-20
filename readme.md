@@ -73,14 +73,14 @@ With `from = '8000105'`, `to = '8011160'` and `date = new Date('2016-08-17T00:00
 				id: '8000105',
 				name: 'Frankfurt(Main)Hbf'
 			},
-			start: '2017-06-05T08:53:00.000Z',
+			departure: '2017-06-05T08:53:00.000Z',
 			departurePlatform: '13',
 			destination: {
 				type: 'station',
 				id: '8098160',
 				name: 'Berlin Hbf (tief)'
 			},
-			end: '2017-06-05T13:17:00.000Z',
+			arrival: '2017-06-05T13:17:00.000Z',
 			arrivalPlatform: '7',
 			line: {
 				type: 'line',

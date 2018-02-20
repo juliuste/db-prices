@@ -45,7 +45,7 @@ const leg = (data) => ({
 		name: data.sn
 		// todo: coordinates
 	},
-	start: when(data.dep),
+	departure: when(data.dep),
 	departurePlatform: data.pd || null,
 	destination: {
 		type: 'station',
@@ -53,7 +53,7 @@ const leg = (data) => ({
 		name: data.dn
 		// todo: coordinates
 	},
-	end: when(data.arr),
+	arrival: when(data.arr),
 	arrivalPlatform: data.pa || null,
 	line: {
 		type: 'line',

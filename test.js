@@ -32,13 +32,13 @@ const findStation = (id) => new Promise((yay, nay) =>
 const validLeg = async (test, t) => {
 	test.ok(t, 'missing trip')
 
-	test.ok(validDate(t.start), 'invalid start date')
+	test.ok(validDate(t.departure), 'invalid departure date')
 	test.ok(t.origin, 'missing `origin`')
 	test.ok(await findStation(t.origin.station), 'station not found')
 	if (t.departurePlatform) test.equal(typeof t.departurePlatform, 'string')
 
-	if (!validDate(t.end)) console.error(t.end, when)
-	test.ok(validDate(t.end), 'invalid end date')
+	if (!validDate(t.arrival)) console.error(t.arrival, when)
+	test.ok(validDate(t.arrival), 'invalid arrival date')
 	test.ok(t.destination, 'missing `destination`')
 	test.ok(await findStation(t.destination.station), 'station not found')
 	if (t.arrivalPlatform) test.equal(typeof t.arrivalPlatform, 'string')
