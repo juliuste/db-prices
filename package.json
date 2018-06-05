@@ -36,7 +36,7 @@
 	"devDependencies": {
 		"db-stations": "^2.0.0",
 		"is-roughly-equal": "^0.1",
-		"tap-spec": "^4.1.1",
+		"tap-spec": "^5.0.0",
 		"tape": "^4.6.3",
 		"tape-promise": "^2.0.1"
 	},
