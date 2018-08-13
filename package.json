@@ -42,7 +42,7 @@
 	},
 	"scripts": {
 		"test": "node test.js | tap-spec",
-		"prepare": "npm test"
+		"prepareOnly": "npm test"
 	},
 	"engine": {
 		"node": ">=6"
