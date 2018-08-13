@@ -27,17 +27,17 @@
 		"parse.js"
 	],
 	"dependencies": {
-		"fetch-ponyfill": "^6.0.0",
+		"fetch-ponyfill": "^6.0.2",
 		"lodash.minby": "^4.6.0",
-		"moment-timezone": "^0.5.5",
-		"query-string": "^5.0.0",
-		"slugg": "^1.2.0"
+		"moment-timezone": "^0.5.21",
+		"query-string": "^5.1.1",
+		"slugg": "^1.2.1"
 	},
 	"devDependencies": {
-		"db-stations": "^2.0.0",
-		"is-roughly-equal": "^0.1",
-		"tap-spec": "^4.1.1",
-		"tape": "^4.6.3",
+		"db-stations": "^2.8.0",
+		"is-roughly-equal": "^0.1.0",
+		"tap-spec": "^4.1.2",
+		"tape": "^4.9.1",
 		"tape-promise": "^2.0.1"
 	},
 	"scripts": {
