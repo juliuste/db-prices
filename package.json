@@ -45,7 +45,7 @@
 		"prepareOnly": "npm test"
 	},
 	"engine": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"license": "ISC"
 }
