@@ -23,7 +23,7 @@ const defaults = {
 	preferFastRoutes: true
 }
 
-const endpoint = 'http://ps.bahn.de/preissuche/preissuche/psc_service.go'
+const endpoint = 'https://ps.bahn.de/preissuche/preissuche/psc_service.go'
 
 const queryPrices = (start, dest, date, opt) => {
 	opt = Object.assign({}, defaults, opt || {})
