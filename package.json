@@ -38,7 +38,7 @@
 		"is-roughly-equal": "^0.1.0",
 		"tap-spec": "^5.0.0",
 		"tape": "^4.9.1",
-		"tape-promise": "^3.0.0"
+		"tape-promise": "^4.0.0"
 	},
 	"scripts": {
 		"test": "node test.js | tap-spec",
