@@ -9,7 +9,6 @@ const stations = require('db-stations')
 const prices = require('.')
 
 const hour = 60 * 60 * 1000
-const day = 24 * hour
 
 const berlin = 8011160
 const münchen = 8000261
@@ -22,8 +21,8 @@ const validDate = (d) => {
 	return isRoughlyEqual(36 * hour, +when, +new Date(d))
 }
 
-const findStation = (id) => new Promise((yay, nay) =>
-	stations(id).on('error', nay).once('data', yay))
+const findStation = (id) => new Promise((resolve, reject) =>
+	stations(id).on('error', reject).once('data', resolve))
 
 const validLeg = async (test, t) => {
 	test.ok(t, 'missing trip')
