@@ -1,14 +1,12 @@
 'use strict'
 
+const tapeWithoutPromise = require('tape')
+const addPromiseSupport = require('tape-promise').default
+const tape = addPromiseSupport(tapeWithoutPromise)
 const moment = require('moment-timezone')
 const isRoughlyEqual = require('is-roughly-equal')
 const stations = require('db-stations')
-const test = require('tape')
-require('tape-promise').default(test)
-
 const prices = require('.')
-
-
 
 const hour = 60 * 60 * 1000
 const day = 24 * hour
@@ -19,8 +17,6 @@ const münchen = 8000261
 const tz = 'Europe/Berlin'
 // some monday in the future
 const when = moment.tz(Date.now(), tz).hour(10).minute(30).second(0).day(1 + 7).toDate()
-
-
 
 const validDate = (d) => {
 	return isRoughlyEqual(36 * hour, +when, +new Date(d))
@@ -72,9 +68,7 @@ const validJourney = async (test, j) => {
 	validPrice(test, j.price)
 }
 
-
-
-test('Berlin Hbf -> München Hbf', async (test) => {
+tape('Berlin Hbf -> München Hbf', async (test) => {
 	const results = await prices(berlin, münchen, when)
 	test.ok(Array.isArray(results))
 	test.ok(results.length > 0, 'no results')
@@ -84,7 +78,6 @@ test('Berlin Hbf -> München Hbf', async (test) => {
 
 	test.end()
 })
-
 
 // todo: opt.class
 // todo: opt.noICETrains
