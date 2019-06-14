@@ -34,29 +34,26 @@
 		"test": "npm run lint && npm run check-deps && node test"
 	},
 	"dependencies": {
-		"fetch-ponyfill": "^6.0.2",
+		"fetch-ponyfill": "^6.1.0",
 		"lodash.minby": "^4.6.0",
-		"moment-timezone": "^0.5.21",
-		"query-string": "^6.1.0",
+		"moment-timezone": "^0.5.25",
+		"query-string": "^6.7.0",
 		"slugg": "^1.2.1"
 	},
 	"devDependencies": {
-		"db-stations": "^2.8.0",
-		"depcheck": "^0.6.11",
-		"eslint": "^5.8.0",
+		"db-stations": "^2.11.0",
+		"depcheck": "^0.8.1",
+		"eslint": "^5.16.0",
 		"eslint-config-standard": "^12.0.0",
-		"eslint-plugin-import": "^2.14.0",
-		"eslint-plugin-node": "^8.0.0",
-		"eslint-plugin-promise": "^4.0.1",
+		"eslint-plugin-import": "^2.17.3",
+		"eslint-plugin-node": "^9.1.0",
+		"eslint-plugin-promise": "^4.1.1",
 		"eslint-plugin-standard": "^4.0.0",
 		"is-roughly-equal": "^0.1.0",
-		"tape": "^4.9.1",
+		"tape": "^4.10.2",
 		"tape-promise": "^4.0.0"
 	},
 	"engines": {
-		"node": ">=8"
-	},
-	"engine": {
 		"node": ">=8"
 	}
 }
