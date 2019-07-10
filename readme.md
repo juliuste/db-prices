@@ -36,7 +36,7 @@ With `opt`, you can override the default options, which look like this:
 	noICETrains: 		false,
 	transferTime: 		0, 	// in minutes
 	duration: 		1440, 	// search for routes in the next n minutes
-	preferFastRoutes: 	true
+	preferFastRoutes: 	true,
 	travellers: [{ 		// one or more
 		bc:	0, 	// BahnCard ID (see https://gist.github.com/juliuste/202bb04f450a79f8fa12a2ec3abcd72d)
 		typ: 	"E", 	// E: adult: K: child; B: baby -- BUG: child and baby dont work ATM
