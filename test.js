@@ -59,7 +59,7 @@ const validJourney = async (test, j) => {
 
 	test.ok(Array.isArray(j.legs), 'missing legs')
 	test.ok(j.legs.length > 0, 'missing legs')
-	for (let leg of j.legs) {
+	for (const leg of j.legs) {
 		await validLeg(test, leg)
 	}
 
@@ -71,7 +71,7 @@ tape('Berlin Hbf -> München Hbf', async (test) => {
 	const results = await prices(berlin, münchen, when)
 	test.ok(Array.isArray(results))
 	test.ok(results.length > 0, 'no results')
-	for (let result of results) {
+	for (const result of results) {
 		await validJourney(test, result)
 	}
 
