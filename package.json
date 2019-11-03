@@ -1,6 +1,6 @@
 {
 	"name": "db-prices",
-	"version": "3.0.2",
+	"version": "3.0.3",
 	"description": "Find the cheapest routes using the DB Sparpreise API.",
 	"keywords": [
 		"DB",
